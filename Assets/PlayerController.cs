@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed ;
     private GameObject Status;
     public bool isEnd;
+    private bool BoostTrigger; 
 
 	// Use this for initialization
 	void Start ()
@@ -25,7 +26,17 @@ public class PlayerController : MonoBehaviour {
         float y = Input.GetAxis("Vertical") * speed;
         rb.AddForce(x, y, 0);
 
-	}
+        BoostTrigger = Status.GetComponent<BoostStatus>().Boost;
+        if (BoostTrigger == false)
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        }
+        else if (BoostTrigger == true)
+        {
+            GetComponent<BoxCollider>().enabled = false;
+        }
+
+    }
 
     public void OnTriggerEnter(Collider other)
     {

@@ -23,7 +23,7 @@ public class BarrierGenerator : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
         GenEnd = Player.GetComponent<PlayerController>().isEnd;

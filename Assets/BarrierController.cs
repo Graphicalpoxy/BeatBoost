@@ -129,38 +129,6 @@ public class BarrierController : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-
-
-
-
-
-
-
-
-
-
-    public void Normal()
-    {
-        this.transform.Rotate(new Vector3(0, 0, rotspeed));
-        this.transform.Translate(0, 0, speedZ);
-        RenderSettings.skybox = normal;
-        Debug.Log("ノーマル");
-
-    }
-
-    public void Slow()
-    {
-        this.transform.Rotate(new Vector3(0, 0, rotspeed / 5));
-        this.transform.Translate(0, 0, speedZ / 5);
-        RenderSettings.skybox = slow;
-        Debug.Log("スロー");
-    }
-
-    public void minBoost()
-    {
-        this.transform.Rotate(new Vector3(0, 0, rotspeed));
-        this.transform.Translate(0, 0, speedZ * 2);
-        RenderSettings.skybox = normal;
-        Debug.Log("身にブースと");
-    }
+    
+  
 }

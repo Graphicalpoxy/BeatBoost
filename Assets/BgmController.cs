@@ -5,28 +5,37 @@ using UnityEngine;
 public class BgmController : MonoBehaviour {
 
     private GameObject Booststatus;
-    private bool BoostTrigger;
-    private float pitch;
+    private bool SlowTrigger;
+    private AudioSource audiosouce;
+    private GameObject Player;
 
     // Use this for initialization
     void Start ()
     {
-        Booststatus = GameObject.Find("BoostStatus");
-        pitch = GetComponent<AudioSource>().pitch;
+        Booststatus = GameObject.Find("Status");
+        Player = GameObject.Find("Player");
+        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        
+        SlowTrigger = Booststatus.GetComponent<BoostStatus>().Slow;
+        audiosouce = GetComponent<AudioSource>();
+       
 
-        if (Input.GetMouseButton(0))
+        if (SlowTrigger == true)
         {
-            GetComponent<AudioSource>().pitch = 0.5f;
+            audiosouce.volume = 0.5f;
         }
-        else
+        else if(SlowTrigger == false)
         {
-            GetComponent<AudioSource>().pitch = 1.0f;
+            audiosouce.volume = 1.0f;
+        }
+
+        if (Player.GetComponent<PlayerController>().isEnd == true)
+        {
+            audiosouce.Stop();
         }
 
 	}

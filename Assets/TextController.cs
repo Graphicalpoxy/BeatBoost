@@ -37,8 +37,7 @@ public class TextController : MonoBehaviour {
         
         score ++;
         scoretext.GetComponent<Text>().text = score.ToString();
-        scoretext.GetComponent<Animation>().Play();
-
-
+        scoretext.GetComponent<Animator>().SetTrigger("ScoreUP");
+      
     }
 }

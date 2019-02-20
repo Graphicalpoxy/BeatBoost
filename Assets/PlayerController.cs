@@ -6,19 +6,22 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     public float Fspeed = 10.0f;
     public float speed ;
-    private GameObject Status;
+    private GameObject Booststatus;
     public bool isEnd;
     private bool BoostTrigger;
     public GameObject InverseRange;
     private float time;
     public Vector3 defaultScale;
 
+    private bool Slow;
 
-	// Use this for initialization
-	void Start ()
+    private Vector3 newAngle = new Vector3(0,0,0);
+
+    // Use this for initialization
+    void Start ()
     {
         rb = GetComponent<Rigidbody>();
-        Status = GameObject.Find("Status");
+        Booststatus = GameObject.Find("Status");
         isEnd = false;
         InverseRange.SetActive(false);
         time = 0;
@@ -32,7 +35,14 @@ public class PlayerController : MonoBehaviour {
         float y = Input.GetAxis("Vertical") * speed;
         rb.AddForce(x, y, 0);
 
-        BoostTrigger = Status.GetComponent<BoostStatus>().Boost;
+        newAngle.x = -3 * y;
+        newAngle.z = -3 * x;
+        transform.localEulerAngles = newAngle;
+
+        BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
+
+        Slow = Booststatus.GetComponent<BoostStatus>().Slow;
+
         if (BoostTrigger == false)
         {
             GetComponent<BoxCollider>().enabled = true;
@@ -42,21 +52,17 @@ public class PlayerController : MonoBehaviour {
             GetComponent<BoxCollider>().enabled = false;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Slow == true)
         {
             InverseRange.SetActive(true);
-            time += Time.deltaTime;
-
-           if(time < 2.0f)
-            {
+            
                 InverseRange.transform.localScale += new Vector3(2  ,1, 1);
-            }
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Slow == false)
         {
             InverseRange.SetActive(false);
             InverseRange.transform.localScale = defaultScale;
-            time = 0;
+            
         }
 
 
@@ -68,7 +74,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Boost")
         {
-            Status.GetComponent<BoostStatus>().stuck();
+            Booststatus.GetComponent<BoostStatus>().stuck();
             Destroy(other);
             GetComponentInChildren<ParticleSystem>().Play();
         }

@@ -4,20 +4,75 @@ using UnityEngine;
 
 public class BoostStatus : MonoBehaviour {
 
-    int i = 0;
+    public int Gemstuck = 0;
     public bool Boost;
     private float BoostTime;
+
+    public bool SlowTrigger;
+    public bool Slow;
+    public float SlowTime;
+
+    public bool MinBoost;
 
     // Use this for initialization
     void Start ()
     {
-        Boost = false;	
-	}
+        Boost = false;
+        SlowTrigger = true;
+        Slow = false;
+        SlowTime = 2.0f;
+
+        MinBoost = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(Boost);
+        Debug.Log("スロー"+ Slow);
+       
+
+
+       if (SlowTime == 2.0f)
+        {
+            SlowTrigger = true;
+        }
+
+
+       if(SlowTrigger == true)
+        {
+            if(Input.GetMouseButton(0))
+            {
+                SlowTime -= Time.deltaTime;
+
+                if (SlowTime >= 0)
+                {
+                    Slow = true;
+                }
+                else if (SlowTime < 0)
+                {
+                    Slow = false;
+                    SlowTrigger = false;
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Slow = false;
+                SlowTrigger = false;
+            }
+        }
+       else if (SlowTrigger == false)
+        {
+            MinBoost = true;
+
+            SlowTime += Time.deltaTime;
+            if (SlowTime >= 2.0f)
+            {
+                SlowTime = 2.0f;
+                MinBoost = false;
+            }
+        }
+
+
 
 	if(Boost == true)
         {
@@ -26,20 +81,20 @@ public class BoostStatus : MonoBehaviour {
             {
                 Boost = false;
                 BoostTime = 0;
-                i = 0;
+                Gemstuck = 0;
             }
         }
 	}
 
     public void stuck()
     {
-        Debug.Log(i);
-        if (i < 4)
+        Debug.Log(Gemstuck);
+        if (Gemstuck < 4)
         {
-            i++;
+            Gemstuck++;
         }
 
-        if (i == 4)
+        if (Gemstuck == 4)
         {
             Boost = true;
  

@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 23272432356228968}
   - component: {fileID: 114279607705216850}
   - component: {fileID: 114285269303539512}
+  - component: {fileID: 114082748702263502}
   m_Layer: 0
   m_Name: BarrierPrefab
   m_TagString: Untagged
@@ -527,6 +528,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3966622, y: 2.2793622, z: 2.1000001}
   m_Center: {x: -0.022504508, y: 1, z: -0.19482045}
+--- !u!114 &114082748702263502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1809831333595594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa31ff86704cd449aebb529a916f676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotspeed: 1
+  speedZ: -1
+  normal: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
+  slow: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  Boost: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
 --- !u!114 &114279607705216850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -549,7 +566,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1809831333595594}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44fbc833377d2034492ee10caa36bbd3, type: 3}
   m_Name: 
@@ -558,7 +575,7 @@ MonoBehaviour:
   speedZ: -1
   normal: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
   slow: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
-  Boost: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
+  Boost: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
 --- !u!114 &114765984636789240
 MonoBehaviour:
   m_ObjectHideFlags: 1

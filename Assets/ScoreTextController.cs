@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ScoreTextController : MonoBehaviour {
 
     int score;
+    private Animator animator;
+
 
     // Use this for initialization
     void Start ()
@@ -20,10 +22,11 @@ public class ScoreTextController : MonoBehaviour {
         GetComponent<Text>().text = score.ToString();
     }
 
-    public void ScoreUP()
-    {
+   // public void ScoreUP()
+    //{
 
-        score = score + 1;
+    //    score = score + 1;
+     //   animator.SetTrigger("ScoreUP");
 
-    }
+   // }
 }

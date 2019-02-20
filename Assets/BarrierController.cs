@@ -50,14 +50,14 @@ public class BarrierController : MonoBehaviour {
                 if (Input.GetMouseButton(0))
                 {
                     time += Time.deltaTime;
-                    Debug.Log("osu ");
+                   
                     if (time > 0 && time < 2)
 
                     {
                         this.transform.Rotate(new Vector3(0, 0, rotspeed / 5));
                         this.transform.Translate(0, 0, speedZ / 5);
                         RenderSettings.skybox = slow;
-                        Debug.Log("スロー");
+                       
                     }
 
                     else if (time > 2.0f)
@@ -68,7 +68,7 @@ public class BarrierController : MonoBehaviour {
                             this.transform.Rotate(new Vector3(0, 0, rotspeed));
                             this.transform.Translate(0, 0, speedZ * 2);
                             RenderSettings.skybox = normal;
-                            Debug.Log("ミニブースト");
+                           
                         }
 
                     }
@@ -81,7 +81,7 @@ public class BarrierController : MonoBehaviour {
                         this.transform.Rotate(new Vector3(0, 0, rotspeed));
                         this.transform.Translate(0, 0, speedZ * 2);
                         RenderSettings.skybox = normal;
-                        Debug.Log("ミニブースト2");
+                        
                     }
                 }
 
@@ -91,7 +91,7 @@ public class BarrierController : MonoBehaviour {
                     this.transform.Rotate(new Vector3(0, 0, rotspeed));
                     this.transform.Translate(0, 0, speedZ);
                     RenderSettings.skybox = normal;
-                    Debug.Log("ノーマル");
+                    
                     time = 0;
                     actime = 0;
                 }

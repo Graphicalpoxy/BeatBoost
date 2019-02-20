@@ -22,7 +22,7 @@ public class TextController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        scoretext.GetComponent<Text>().text = score.ToString();
+        //scoretext.GetComponent<Text>().text = score.ToString();
 
         bool gameover = player.GetComponent<PlayerController>().isEnd;
         if(gameover == true)
@@ -36,7 +36,9 @@ public class TextController : MonoBehaviour {
     {
         
         score ++;
- 
+        scoretext.GetComponent<Text>().text = score.ToString();
+        scoretext.GetComponent<Animation>().Play();
+
 
     }
 }

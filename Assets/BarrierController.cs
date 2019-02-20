@@ -81,7 +81,7 @@ public class BarrierController : MonoBehaviour {
                         this.transform.Rotate(new Vector3(0, 0, rotspeed));
                         this.transform.Translate(0, 0, speedZ * 2);
                         RenderSettings.skybox = normal;
-                        Debug.Log("ミニブースト");
+                        Debug.Log("ミニブースト2");
                     }
                 }
 

@@ -47,7 +47,7 @@ public class BarrierGenerator : MonoBehaviour {
             if (BoostTrigger == true)
             {
                 time += Time.deltaTime;
-                if (time > 0.3f)
+                if (time > 0.1f)
                 {
                     time = 0;
                     int offsetX = Random.Range(-50, 50);

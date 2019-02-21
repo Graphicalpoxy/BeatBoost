@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;    // namespace の指定をわすれずに！
 
 public class ParticleController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class ParticleController : MonoBehaviour {
     private Vector3 offset;
     private GameObject Booststatus;
     private bool BoostTrigger;
+    private Animation anime;
    
     
 
@@ -18,6 +20,7 @@ public class ParticleController : MonoBehaviour {
         offset = transform.position - Player.transform.position;
         Booststatus = GameObject.Find("Status");
         BoostTrigger = false;
+        anime = GetComponent<Animation>();
         
     }
 	
@@ -42,5 +45,9 @@ public class ParticleController : MonoBehaviour {
             mainModule.simulationSpeed = 500;
         }
 
+        if (Music.IsJustChangedBeat())
+        {
+            anime.Play();
+        }
     }
 }

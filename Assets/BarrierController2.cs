@@ -87,7 +87,7 @@ public class BarrierController2 : MonoBehaviour
             if (BoostTrigger == true)
             {
                 this.transform.Rotate(new Vector3(0, 0, rotspeed));
-                this.transform.Translate(0, 0, speedZ * 10);
+                this.transform.Translate(0, 0, speedZ * 30);
                 RenderSettings.skybox = Boost;
             }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;    // namespace の指定をわすれずに！
+
 
 public class CameraController : MonoBehaviour {
 
@@ -12,6 +12,11 @@ public class CameraController : MonoBehaviour {
     private float time;
     private Vector3 dif = new Vector3(0,0,0);
 
+    private bool SlowTrigger;
+    private float Slowtime;
+    private bool MinBoost;
+    private float Minboosttime;
+
     // Use this for initialization
     void Start ()
     {
@@ -19,6 +24,8 @@ public class CameraController : MonoBehaviour {
         offset = transform.position - Player.transform.position;
         Booststatus = GameObject.Find("Status");
         BoostTrigger = false;
+        Minboosttime = 0;
+
     }
 	
 	// Update is called once per frame
@@ -29,19 +36,38 @@ public class CameraController : MonoBehaviour {
         dif.y = Input.GetAxis("Vertical") * -2;
 
         BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
+        SlowTrigger = Booststatus.GetComponent<BoostStatus>().SlowTrigger;
+        MinBoost = Booststatus.GetComponent<BoostStatus>().MinBoost;
+        Slowtime = Booststatus.GetComponent<BoostStatus>().SlowTime;
 
         if (BoostTrigger == false)
         {
             transform.position = Player.transform.position + offset + dif;
-           
-
             GetComponent<RippleEffect>().enabled = false;
             time = 0;
+
+            if (SlowTrigger == true)
+            {
+                if (Input.GetMouseButtonDown(0))
+                CameraShakeManager.Instance.Play("Camera Shakes/Ambient");
+            }
+            
+            if (Slowtime < 0)
+            {
+                CameraShakeManager.Instance.Play("Camera Shakes/Impact");
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                CameraShakeManager.Instance.Play("Camera Shakes/Impact");
+            }
+
+
+
         }
         else if (BoostTrigger == true)
         {
             transform.position = Player.transform.position + offset;
-            transform.DOShakeRotation(0f);
+            CameraShakeManager.Instance.Play("Camera Shakes/Default");
 
             time += Time.deltaTime;
             if (time < 5.0f)

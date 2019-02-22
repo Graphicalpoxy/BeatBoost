@@ -23,7 +23,9 @@ public class CameraController : MonoBehaviour {
 
 
     private GameObject Menu;
-   
+
+    public bool isPauseButtonDown;
+
 
     // Use this for initialization
     void Start ()
@@ -34,9 +36,11 @@ public class CameraController : MonoBehaviour {
         BoostTrigger = false;
         Minboosttime = 0;
         isPlayButtonDown = false;
+        isPauseButtonDown = false;
 
-        
-       
+
+
+
     }
 	
 	// Update is called once per frame
@@ -59,6 +63,16 @@ public class CameraController : MonoBehaviour {
 
         if (isEndCamera == false)
         {
+            if (Mathf.Approximately(Time.timeScale, 0f))
+            {
+                return;
+            }
+
+
+            if (isPauseButtonDown)
+            {
+                Time.timeScale = 0f;
+            }
 
             dif.x = Input.GetAxis("Horizontal") * -2;
             dif.y = Input.GetAxis("Vertical") * -2;
@@ -112,7 +126,7 @@ public class CameraController : MonoBehaviour {
     public void GetMyPlayButtonDown()
     {
         this.isPlayButtonDown = true;
-        Debug.Log("スタートボタン");
+
 
     }
 
@@ -121,4 +135,15 @@ public class CameraController : MonoBehaviour {
         this.isPlayButtonDown = false;
     }
 
+    public void GetMyPauseButtonDown()
+    {
+        this.isPauseButtonDown = true;
+
+
+    }
+
+    public void GetMyPauseButtonUP()
+    {
+        this.isPauseButtonDown = false;
+    }
 }

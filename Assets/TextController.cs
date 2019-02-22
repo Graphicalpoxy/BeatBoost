@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour {
 
-    int score;
+    public int score;
     private GameObject scoretext;
     private GameObject gameovertext;
     private GameObject player;
@@ -28,9 +28,7 @@ public class TextController : MonoBehaviour {
         if(isEnd == true)
         {
             score = 0;
-            if (score != 0)
-            scoretext.GetComponent<Text>().text = score.ToString();
-            
+             
         }
 
 	}

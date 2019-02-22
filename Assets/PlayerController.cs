@@ -17,55 +17,73 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 newAngle = new Vector3(0,0,0);
 
+
+    private GameObject MainCamera;
+    private bool isPlayButtom;
+
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         Booststatus = GameObject.Find("Status");
-        isEnd = false;
+        isEnd = true;
         InverseRange.SetActive(false);
         time = 0;
         defaultScale = InverseRange.transform.localScale;
+
+        MainCamera = GameObject.Find("MainCamera");       
+        isPlayButtom = false; 
+
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        float x = Input.GetAxis("Horizontal") * speed;
-        float y = Input.GetAxis("Vertical") * speed;
-        rb.AddForce(x, y, 0);
-
-        newAngle.x = -3 * y;
-        newAngle.z = -3 * x;
-        transform.localEulerAngles = newAngle;
-
-        BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
-
-        Slow = Booststatus.GetComponent<BoostStatus>().Slow;
-
-        if (BoostTrigger == false)
+        isPlayButtom = MainCamera.GetComponent<CameraController>().isPlayButtonDown;
+        if (isPlayButtom == true)
         {
-            GetComponent<BoxCollider>().enabled = true;
+            isEnd = false;
         }
-        else if (BoostTrigger == true)
+        if (isEnd == false)
         {
-            GetComponent<BoxCollider>().enabled = false;
-        }
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            rb.velocity = new Vector3(x * speed, y * speed, 0);
 
-        if (Slow == true)
+            newAngle.x = -30 * y;
+            newAngle.z = -30 * x;
+            transform.localEulerAngles = newAngle;
+
+            BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
+
+            Slow = Booststatus.GetComponent<BoostStatus>().Slow;
+
+            if (BoostTrigger == false)
+            {
+                GetComponent<BoxCollider>().enabled = true;
+            }
+            else if (BoostTrigger == true)
+            {
+                GetComponent<BoxCollider>().enabled = false;
+            }
+
+            if (Slow == true)
+            {
+                InverseRange.SetActive(true);
+
+                InverseRange.transform.localScale += new Vector3(2, 1, 1);
+            }
+            if (Slow == false)
+            {
+                InverseRange.SetActive(false);
+                InverseRange.transform.localScale = defaultScale;
+
+            }
+        }
+        else if(isEnd == true)
         {
-            InverseRange.SetActive(true);
-            
-                InverseRange.transform.localScale += new Vector3(2  ,1, 1);
+            transform.position = new Vector3(0, 0, 0);
         }
-        if (Slow == false)
-        {
-            InverseRange.SetActive(false);
-            InverseRange.transform.localScale = defaultScale;
-            
-        }
-
-
 
 
     }

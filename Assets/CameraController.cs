@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public class CameraController : MonoBehaviour {
@@ -17,6 +18,13 @@ public class CameraController : MonoBehaviour {
     private bool MinBoost;
     private float Minboosttime;
 
+    public bool isPlayButtonDown;
+    private bool isEndCamera;
+
+
+    private GameObject Menu;
+   
+
     // Use this for initialization
     void Start ()
     {
@@ -25,59 +33,92 @@ public class CameraController : MonoBehaviour {
         Booststatus = GameObject.Find("Status");
         BoostTrigger = false;
         Minboosttime = 0;
+        isPlayButtonDown = false;
 
+        
+       
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        isEndCamera = Player.GetComponent<PlayerController>().isEnd;
 
-        dif.x = Input.GetAxis("Horizontal") * -2;
-        dif.y = Input.GetAxis("Vertical") * -2;
-
-        BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
-        SlowTrigger = Booststatus.GetComponent<BoostStatus>().SlowTrigger;
-        MinBoost = Booststatus.GetComponent<BoostStatus>().MinBoost;
-        Slowtime = Booststatus.GetComponent<BoostStatus>().SlowTime;
-
-        if (BoostTrigger == false)
+        if (isPlayButtonDown == true && isEndCamera == false)
         {
-            transform.position = Player.transform.position + offset + dif;
-            GetComponent<RippleEffect>().enabled = false;
-            time = 0;
-
-            if (SlowTrigger == true)
-            {
-                if (Input.GetMouseButtonDown(0))
-                CameraShakeManager.Instance.Play("Camera Shakes/Ambient");
-            }
+            transform.DORotate(new Vector3(5, 0, 0), 1);
             
-            if (Slowtime < 0)
-            {
-                CameraShakeManager.Instance.Play("Camera Shakes/Impact");
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                CameraShakeManager.Instance.Play("Camera Shakes/Impact");
-            }
-
-
-
+           
         }
-        else if (BoostTrigger == true)
+        if (isEndCamera == true)
         {
-            transform.position = Player.transform.position + offset;
-            CameraShakeManager.Instance.Play("Camera Shakes/Default");
+            transform.DORotate(new Vector3(5, 180, 0), 1);
+            transform.DOMove(new Vector3(0, 5, -15), 1);
+        }
 
-            time += Time.deltaTime;
-            if (time < 5.0f)
+
+        if (isEndCamera == false)
+        {
+
+            dif.x = Input.GetAxis("Horizontal") * -2;
+            dif.y = Input.GetAxis("Vertical") * -2;
+            BoostTrigger = Booststatus.GetComponent<BoostStatus>().Boost;
+            SlowTrigger = Booststatus.GetComponent<BoostStatus>().SlowTrigger;
+            MinBoost = Booststatus.GetComponent<BoostStatus>().MinBoost;
+            Slowtime = Booststatus.GetComponent<BoostStatus>().SlowTime;
+
+            if (BoostTrigger == false)
             {
-                GetComponent<RippleEffect>().enabled = true;
-            }
-            else if (time >= 5.0f)
-            {
+                transform.position = Player.transform.position + offset + dif;
                 GetComponent<RippleEffect>().enabled = false;
+                time = 0;
+
+                if (SlowTrigger == true)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                        CameraShakeManager.Instance.Play("Camera Shakes/Ambient");
+                }
+
+                if (Slowtime < 0)
+                {
+                    CameraShakeManager.Instance.Play("Camera Shakes/Impact");
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    CameraShakeManager.Instance.Play("Camera Shakes/Impact");
+                }
+
+
+
+            }
+            else if (BoostTrigger == true)
+            {
+                transform.position = Player.transform.position + offset;
+                CameraShakeManager.Instance.Play("Camera Shakes/Default");
+
+                time += Time.deltaTime;
+                if (time < 5.0f)
+                {
+                    GetComponent<RippleEffect>().enabled = true;
+                }
+                else if (time >= 5.0f)
+                {
+                    GetComponent<RippleEffect>().enabled = false;
+                }
             }
         }
     }
+
+    public void GetMyPlayButtonDown()
+    {
+        this.isPlayButtonDown = true;
+        Debug.Log("スタートボタン");
+
+    }
+
+    public void GetMyPlayButtonUP()
+    {
+        this.isPlayButtonDown = false;
+    }
+
 }

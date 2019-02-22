@@ -28,8 +28,6 @@ public class BoostStatus : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("スロー"+ Slow);
-       
 
 
        if (SlowTime == 2.0f)

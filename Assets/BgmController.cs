@@ -35,7 +35,7 @@ public class BgmController : MonoBehaviour {
 
         if (Player.GetComponent<PlayerController>().isEnd == true)
         {
-            audiosouce.Stop();
+            audiosouce.volume = 0.3f;
         }
 
 	}

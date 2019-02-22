@@ -30,7 +30,5 @@ public class UIImageController : MonoBehaviour {
 
         Meter.fillAmount = Slowtime / 2;
         BoostMeter.fillAmount = Gemstuck / 4;
-
-        Debug.Log("UI"+ BoostMeter.fillAmount);
 	}
 }

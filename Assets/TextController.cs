@@ -16,7 +16,7 @@ public class TextController : MonoBehaviour {
 
         score = 0;
         scoretext = GameObject.Find("ScoreText");
-        gameovertext = GameObject.Find("GameOverText");
+
         player = GameObject.Find("Player");
 	}
 	
@@ -24,10 +24,13 @@ public class TextController : MonoBehaviour {
 	void Update () {
         //scoretext.GetComponent<Text>().text = score.ToString();
 
-        bool gameover = player.GetComponent<PlayerController>().isEnd;
-        if(gameover == true)
+        bool isEnd = player.GetComponent<PlayerController>().isEnd;
+        if(isEnd == true)
         {
-            gameovertext.GetComponent<Text>().text = ("GameOver");
+            score = 0;
+            if (score != 0)
+            scoretext.GetComponent<Text>().text = score.ToString();
+            
         }
 
 	}

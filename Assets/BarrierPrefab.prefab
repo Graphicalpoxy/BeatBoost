@@ -539,8 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa31ff86704cd449aebb529a916f676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotspeed: 2
-  speedZ: -2
+  rotspeed: 6
+  speedZ: -4
   normal: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}
   slow: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   Boost: {fileID: 2100000, guid: b9be0c15efe8ad9489fdeead114d8ec5, type: 2}

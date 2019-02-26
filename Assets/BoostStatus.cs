@@ -14,6 +14,8 @@ public class BoostStatus : MonoBehaviour {
 
     public bool MinBoost;
 
+    public bool isSlowButtonDown;
+
     // Use this for initialization
     void Start ()
     {
@@ -26,7 +28,7 @@ public class BoostStatus : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
     {
 
 
@@ -36,29 +38,54 @@ public class BoostStatus : MonoBehaviour {
         }
 
 
+
+
        if(SlowTrigger == true)
         {
-            if(Input.GetMouseButton(0))
-            {
-                SlowTime -= Time.deltaTime;
 
-                if (SlowTime >= 0)
-                {
-                    Slow = true;
-                }
-                else if (SlowTime < 0)
-                {
-                    Slow = false;
-                    SlowTrigger = false;
-                }
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                Slow = false;
-                SlowTrigger = false;
-            }
+            //if (Input.touchCount > 0)
+            //{
+               // Touch[] touchInfo = Input.touches;
+                //for (int i = 0; i < touchInfo.Length; i++)
+                //{
+                   // Touch touch = Input.GetTouch(i);
+
+
+
+                    if (isSlowButtonDown == true)
+                    //if (touch.phase == TouchPhase.Moved)
+                    {
+                        //if (touchInfo[i].position.x > Screen.width / 2)
+                        //{
+                            SlowTime -= Time.deltaTime;
+
+                            if (SlowTime >= 0)
+                            {
+                                Slow = true;
+                            }
+                            else if (SlowTime < 0)
+                            {
+                                Slow = false;
+                                SlowTrigger = false;
+                            }
+                       // }
+                    }
+                    else if (isSlowButtonDown == false)
+                    //else if (touch.phase == TouchPhase.Ended)
+                    {
+                        //if (touchInfo[i].position.x > Screen.width / 2)
+                        //{
+                            Slow = false;
+                            SlowTrigger = false;
+                       // }
+                    }
+                //}
+            //}
+            
         }
-       else if (SlowTrigger == false)
+
+
+        else if (SlowTrigger == false)
         {
             MinBoost = true;
 
@@ -98,4 +125,19 @@ public class BoostStatus : MonoBehaviour {
  
         }
     }
+
+    public void GetMySlowButtonDown()
+    {
+        this.isSlowButtonDown = true;
+
+
+    }
+
+    public void GetMySlowButtonUP()
+    {
+        this.isSlowButtonDown = false;
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
@@ -46,9 +47,17 @@ public class PlayerController : MonoBehaviour {
         }
         if (isEnd == false)
         {
+
+
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
+
+            float x2 = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+            float y2 = CrossPlatformInputManager.GetAxisRaw("Vertical");
+
             rb.velocity = new Vector3(x * speed, y * speed, 0);
+            rb.velocity = new Vector3(x2 * speed, y2 * speed, 0);
+
 
             newAngle.x = -30 * y;
             newAngle.z = -30 * x;
@@ -95,6 +104,10 @@ public class PlayerController : MonoBehaviour {
             Booststatus.GetComponent<BoostStatus>().stuck();
             Destroy(other);
             GetComponentInChildren<ParticleSystem>().Play();
+
+            GameObject.Find("Canvas").GetComponent<TextController>().ScoreUP2();
+
+
         }
 
         if (other.gameObject.tag == "Barrier")

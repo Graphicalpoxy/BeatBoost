@@ -82,7 +82,6 @@ public class BarrierController2 : MonoBehaviour
                 RenderSettings.skybox = Boost;
             }
 
-
             if (this.transform.position.z < 0)
             {
 
